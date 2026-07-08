@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Runner 🐱</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-mesh" aria-hidden="true"></div>
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
+
+  <main class="game-wrapper">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="brand-icon">🐱</span>
+        <div>
+          <h1 class="brand-title">Neon Runner</h1>
+          <p class="brand-sub" id="mapLabel">Neon City</p>
+        </div>
+      </div>
+      <div class="lives" id="livesDisplay" aria-label="Nyawa tersisa">
+        <span class="life active">❤️</span>
+        <span class="life active">❤️</span>
+        <span class="life active">❤️</span>
+      </div>
+    </header>
+
+    <section class="hud">
+      <div class="hud-card">
+        <span class="hud-icon">🏆</span>
+        <div>
+          <span class="label">Skor</span>
+          <span id="score" class="value">0</span>
+        </div>
+      </div>
+      <div class="hud-card">
+        <span class="hud-icon">⭐</span>
+        <div>
+          <span class="label">Rekor</span>
+          <span id="highscore" class="value">0</span>
+        </div>
+      </div>
+      <div class="hud-card">
+        <span class="hud-icon">⚡</span>
+        <div>
+          <span class="label">Kecepatan</span>
+          <span id="speed" class="value">1.0x</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="canvas-container" id="canvasContainer">
+      <canvas id="game" width="800" height="300" aria-label="Area permainan Neon Runner"></canvas>
+
+      <div id="hitFlash" class="hit-flash hidden" aria-hidden="true"></div>
+
+      <div id="retryToast" class="retry-toast hidden">
+        <span class="retry-icon">💥</span>
+        <p class="retry-title">Tabrakan!</p>
+        <p class="retry-sub" id="retryMessage">Nyawa tersisa: 2</p>
+      </div>
+
+      <div id="overlay" class="overlay">
+        <div class="panel glass-panel">
+          <div class="panel-badge">ARCADE MODE</div>
+          <h2 class="panel-title">Siap Lari, Kucing?</h2>
+          <p class="tagline">Lompat hindari rintangan. Kamu punya <strong>3 nyawa</strong> (2x coba lagi).</p>
+
+          <div class="section-label">Pilih Map</div>
+          <div class="map-grid" id="mapGrid">
+            <button class="map-card active" data-map="neon" type="button">
+              <span class="map-preview map-neon"></span>
+              <span class="map-name">Neon City</span>
+              <span class="map-desc">Cyberpunk klasik</span>
+            </button>
+            <button class="map-card" data-map="forest" type="button">
+              <span class="map-preview map-forest"></span>
+              <span class="map-name">Forest Run</span>
+              <span class="map-desc">Hutan hijau tenang</span>
+            </button>
+            <button class="map-card" data-map="ocean" type="button">
+              <span class="map-preview map-ocean"></span>
+              <span class="map-name">Ocean Deep</span>
+              <span class="map-desc">Bawah laut misterius</span>
+            </button>
+            <button class="map-card" data-map="sunset" type="button">
+              <span class="map-preview map-sunset"></span>
+              <span class="map-name">Sunset Dune</span>
+              <span class="map-desc">Gurun panas terik</span>
+            </button>
+            <button class="map-card" data-map="city" type="button">
+              <span class="map-preview map-city"></span>
+              <span class="map-name">Night City</span>
+              <span class="map-desc">Urban gelap neon</span>
+            </button>
+          </div>
+
+          <ul class="tips">
+            <li><kbd>SPACE</kbd> / <kbd>↑</kbd> / tap untuk lompat</li>
+            <li>Kumpulkan bintang ⭐ = <strong>+50</strong> poin</li>
+            <li>Geser mouse untuk gerak halus</li>
+          </ul>
+          <button id="startBtn" class="btn btn-primary" type="button">
+            <span>MULAI MAIN</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="gameover" class="overlay hidden">
+        <div class="panel glass-panel gameover-panel">
+          <div class="panel-badge danger">GAME OVER</div>
+          <h2 class="panel-title">Kucing Kehabisan Nyawa</h2>
+          <p class="final-score">Skor akhir <span id="finalScore">0</span></p>
+          <p id="newRecord" class="new-record hidden">🎉 Rekor baru tercatat!</p>
+          <div class="gameover-actions">
+            <button id="restartBtn" class="btn btn-primary" type="button">Main Lagi</button>
+            <button id="menuBtn" class="btn btn-ghost" type="button">Ganti Map</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Neon Runner v2 — 3 nyawa per ronde · 5 map unik</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
